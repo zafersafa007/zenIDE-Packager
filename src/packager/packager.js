@@ -1349,7 +1349,7 @@ cd "$(dirname "$0")"
       }
 
       for (const extension of ${JSON.stringify(this.options.extensions.map(i => i.url))}) {
-        fetch(extension)).then(r=>r.text()).then(t=>eval(t))
+        vm.extensionManager.loadExtensionURL(extension);
       }
 
       ${this.options.closeWhenStopped ? `vm.runtime.on('PROJECT_RUN_STOP', () => window.close());` : ''}

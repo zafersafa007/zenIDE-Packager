@@ -51,10 +51,18 @@ class Monitor {
       label = this.parent.getMessage('var-size');
     } else if (this.opcode === 'sensing_answer') {
       label = this.parent.getMessage('var-answer');
+    } else if (this.opcode === 'sensing_mousedown') {
+      label = this.parent.getMessage('var-mousedown');
+    } else if (this.opcode === 'sensing_mousex') {
+      label = this.parent.getMessage('var-mousex');
+    } else if (this.opcode === 'sensing_mousey') {
+      label = this.parent.getMessage('var-mousey');
     } else if (this.opcode === 'sensing_loudness') {
       label = this.parent.getMessage('var-loudness');
     } else if (this.opcode === 'sensing_timer') {
       label = this.parent.getMessage('var-timer');
+    } else if (this.opcode === 'sensing_dayssince2000') {
+      label = this.parent.getMessage('var-dayssince2000');
     } else if (this.opcode === 'sound_volume') {
       label = this.parent.getMessage('var-volume');
     } else if (this.opcode === 'sensing_current') {
@@ -75,7 +83,12 @@ class Monitor {
         label = this.parent.getMessage('var-second');
       }
     } else {
-      label = this.parent.vm.runtime.getLabelForOpcode(this.opcode).label;
+      const vmLabel = this.parent.vm.runtime.getLabelForOpcode(this.opcode);
+      if (vmLabel) {
+        label = vmLabel.label;
+      } else {
+        label = this.opcode;
+      }
     }
 
     if (this.spriteName) {

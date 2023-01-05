@@ -40,7 +40,6 @@
   }
   defaultOptions.app.packageName = Packager.getDefaultPackageNameFromFileName(projectData.title);
   defaultOptions.app.windowTitle = Packager.getWindowTitleFromFileName(projectData.title);
-  defaultOptions.extensions = projectData.project.analysis.extensions.map(url => ({url}));
   const options = writablePersistentStore(`PackagerOptions.${projectData.uniqueId}`, defaultOptions);
 
   const hasMagicComment = (magic) => projectData.project.analysis.stageComments.find(
@@ -88,17 +87,6 @@
     'electron-linux64'
   ].includes($options.target);
 
-  const advancedOptionsInitiallyOpen = (
-    $options.compiler.enabled !== defaultOptions.compiler.enabled ||
-    $options.compiler.warpTimer !== defaultOptions.compiler.warpTimer ||
-    $options.extensions.length !== 0 ||
-    $options.bakeExtensions !== defaultOptions.bakeExtensions ||
-    $options.custom.css !== '' ||
-    $options.custom.js !== '' ||
-    $options.projectId !== defaultOptions.projectId ||
-    $options.packagedRuntime !== defaultOptions.packagedRuntime
-  );
-
   const automaticallyCenterCursor = () => {
     const icon = $customCursorIcon;
     const url = URL.createObjectURL(icon)
@@ -132,10 +120,6 @@
 
     task.setProgressText($_('progress.loadingScripts'));
 
-    packager.addEventListener('fetch-extensions', ({detail}) => {
-      task.setProgressText($_('progress.downloadingExtensions'));
-      task.setProgress(detail.progress);
-    });
     packager.addEventListener('large-asset-fetch', ({detail}) => {
       let thing;
       if (detail.asset.startsWith('nwjs-')) {
@@ -709,7 +693,7 @@
 >
   <div>
     <h2>{$_('options.advancedOptions')}</h2>
-    <details open={advancedOptionsInitiallyOpen}>
+    <details>
       <summary>{$_('options.advancedSummary')}</summary>
 
       <div class="option">
@@ -738,11 +722,6 @@
       </label>
 
       <label class="option">
-        <input type="checkbox" bind:checked={$options.bakeExtensions}>
-        {$_('options.bakeExtensions')}
-      </label>
-
-      <label class="option">
         {$_('options.customCSS')}
         <textarea bind:value={$options.custom.css}></textarea>
       </label>
@@ -759,7 +738,8 @@
 
       <label class="option">
         <input type="checkbox" bind:checked={$options.packagedRuntime} />
-        {$_('options.packagedRuntime')}
+        <!-- This option is temporary, so don't translate. -->
+        Use "packaged runtime" mode (experimental)
       </label>
     </details>
   </div>

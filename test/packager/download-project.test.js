@@ -21,7 +21,6 @@ test('sb3', async () => {
     }
   ]);
   expect(project.analysis.usesMusic).toBe(false);
-  expect(project.analysis.extensions).toStrictEqual([]);
 });
 
 test('sb3 with implied cloud variables', async () => {
@@ -64,7 +63,6 @@ test('sb2', async () => {
       isCloud: false
     }
   ]);
-  expect(project.analysis.extensions).toStrictEqual([]);
 });
 
 test('sb2 with music', async () => {
@@ -78,7 +76,6 @@ test('sb', async () => {
   const project = await downloadProject(readTestProject('project.sb'), () => {});
   expect(project.arrayBuffer.byteLength).toBe(554);
   expect(project.type).toBe('blob');
-  expect(project.analysis.extensions).toStrictEqual([]);
 });
 
 test('subdirectory', async () => {
@@ -93,11 +90,4 @@ test('invalid project', async () => {
     return;
   }
   throw new Error('Expected error, got success');
-});
-
-test('custom extensions', async () => {
-  const project = await downloadProject(readTestProject('fetch.sb3'), () => {});
-  expect(project.analysis.extensions).toStrictEqual([
-    'https://extensions.turbowarp.org/fetch.js'
-  ]);
 });

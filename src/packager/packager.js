@@ -981,49 +981,6 @@ cd "$(dirname "$0")"
     return `url(${data}) ${this.options.cursor.center.x} ${this.options.cursor.center.y}, auto`;
   }
 
-  async generateExtensionURLs () {
-    const dispatchProgress = (progress) => this.dispatchEvent(new CustomEvent('fetch-extensions', {
-      detail: {
-        progress
-      }
-    }));
-
-    const shouldTryToFetch = (url) => {
-      if (!this.options.bakeExtensions) {
-        return false;
-      }
-      try {
-        const parsed = new URL(url);
-        return parsed.protocol === 'http:' || parsed.protocol === 'https:';
-      } catch (e) {
-        return false;
-      }
-    };
-
-    /** @type {string[]} */
-    const allURLs = this.options.extensions.map(i => i.url);
-    const unfetchableURLs = allURLs.filter((url) => !shouldTryToFetch(url));
-    const urlsToFetch = allURLs.filter((url) => shouldTryToFetch(url));
-    const finalURLs = [...unfetchableURLs];
-
-    if (urlsToFetch.length !== 0) {
-      for (let i = 0; i < urlsToFetch.length; i++) {
-        dispatchProgress(i / urlsToFetch.length);
-        const url = urlsToFetch[i];
-        try {
-          const source = await Adapter.fetchExtensionScript(url);
-          const dataURI = `data:text/javascript;,${encodeURIComponent(source)}`;
-          finalURLs.push(dataURI);
-        } catch (e) {
-          finalURLs.push(url);
-        }
-      }
-      dispatchProgress(1);
-    }
-
-    return finalURLs;
-  }
-
   async package () {
     if (!Adapter) {
       throw new Error('Missing adapter');
@@ -1298,10 +1255,10 @@ cd "$(dirname "$0")"
       pauseButton.className = 'control-button';
       let isPaused = false;
       pauseButton.addEventListener('click', () => {
-        vm.setPaused(!isPaused);
+        isPaused = !isPaused;
+        vm.setPaused(isPaused);
       });
-      const updatePause = (_isPaused) => {
-        isPaused = _isPaused;
+      const updatePause = () => {
         if (isPaused) {
           pauseButton.src = 'data:image/svg+xml,' + encodeURIComponent('<svg width="16" height="16" viewBox="0 0 4.2333332 4.2333335" xmlns="http://www.w3.org/2000/svg"><path d="m3.95163484 2.02835365-1.66643921.9621191-1.66643913.96211911V.10411543l1.66643922.9621191z" fill="#ffae00"/></svg>');
         } else {
@@ -1398,7 +1355,7 @@ cd "$(dirname "$0")"
           return Promise.resolve(false);
         }
       });
-      for (const extension of ${JSON.stringify(await this.generateExtensionURLs())}) {
+      for (const extension of ${JSON.stringify(this.options.extensions.map(i => i.url))}) {
         vm.extensionManager.loadExtensionURL(extension);
       }
 
@@ -1616,8 +1573,7 @@ Packager.DEFAULT_OPTIONS = () => ({
       y: 0
     }
   },
-  extensions: [],
-  bakeExtensions: true
+  extensions: []
 });
 
 export default Packager;

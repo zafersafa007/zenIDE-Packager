@@ -4,8 +4,7 @@ import {downloadProjectFromBuffer} from '@turbowarp/sbdl';
 const unknownAnalysis = () => ({
   stageVariables: [],
   stageComments: [],
-  usesMusic: true,
-  extensions: []
+  usesMusic: true
 });
 
 const analyzeScratch2 = (projectData) => {
@@ -40,13 +39,11 @@ const analyzeScratch3 = (projectData) => {
     .map((i) => i.text);
   // TODO: usesMusic has possible false negatives
   const usesMusic = projectData.extensions.includes('music');
-  const extensions = projectData.extensionURLs ? Object.values(projectData.extensionURLs) : [];
   return {
     ...unknownAnalysis(),
     stageVariables,
     stageComments,
-    usesMusic,
-    extensions
+    usesMusic
   };
 };
 

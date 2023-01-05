@@ -1,5 +1,6 @@
 <script>
-  import {onMount, tick} from 'svelte';
+  import {onMount} from 'svelte';
+  import {writable} from 'svelte/store';
   import {_} from '../locales';
   import Section from './Section.svelte';
   import Button from './Button.svelte';
@@ -113,9 +114,7 @@
       inputForRememberingProjectFile.files = copyFileList(files);
     }
     if (files.length && $type === 'file') {
-      // if $type was updated before calling this function, wait for the current task to get
-      // cancelled before we start the next one
-      tick().then(load);
+      load();
     }
   };
   const handleDrop = ({detail: dataTransfer}) => {
@@ -159,10 +158,17 @@
       uniqueId = `#${id}`;
 
       task.setProgressText($_('progress.loadingProjectMetadata'));
-      const metadata = await getProjectMetadata(id);
+      let metadata;
+      try {
+        metadata = await getProjectMetadata(id);
+      } catch (e) {
+        // For now, we'll treat this as non-critical.
+        // In the future, this will probably be a critical error.
+        console.error(e);
+      }
 
-      const token = metadata.token;
-      projectTitle = metadata.title;
+      const token = metadata ? metadata.token : null;
+      projectTitle = metadata ? metadata.title : '';
 
       task.setProgressText($_('progress.loadingProjectData'));
       const {promise: loadProjectPromise, terminate} = await loadProject.fromID(id, token, progressCallback);
@@ -267,7 +273,7 @@
 
     {#if $type === "id"}
       <p>
-        {$_('select.unsharedProjects')}
+        {$_('select.unsharedProjectsTemporary')}
       </p>
       <p>
         {$_('select.unsharedProjectsWorkaround')}

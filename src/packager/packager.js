@@ -1329,7 +1329,7 @@ cd "$(dirname "$0")"
           document.body.appendChild(fullscreenButton);
         }
       }` : ''}
-      fetch('https://raw.githubusercontent.com/PenguinMod/PenguinMod-Vm/develop/src/extensions/jg_files/index.js').then(r=>r.text()).then(t=>eval(t))
+      //fetch('https://raw.githubusercontent.com/PenguinMod/PenguinMod-Vm/develop/src/extensions/jg_files/index.js').then(r=>r.text()).then(t=>eval(t))
       vm.setTurboMode(${this.options.turbo});
       if (vm.setInterpolation) vm.setInterpolation(${this.options.interpolation});
       if (vm.setFramerate) vm.setFramerate(${this.options.framerate});

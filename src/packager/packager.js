@@ -1416,7 +1416,7 @@ cd "$(dirname "$0")"
 
     if (this.options.target !== 'html') {
       let zip;
-      if (this.project.type === 'sb3' && this.options.target !== 'zip-one-asset') {
+      if (this.project.type === 'sb3'|| this.project.type === 'pm' && this.options.target !== 'zip-one-asset') {
         zip = await (await getJSZip()).loadAsync(this.project.arrayBuffer);
         for (const file of Object.keys(zip.files)) {
           zip.files[`assets/${file}`] = zip.files[file];

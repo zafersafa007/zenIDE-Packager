@@ -73,7 +73,7 @@ export const downloadProject = async (projectData, progressCallback = () => {}) 
     },
 
     processJSON(type, projectData) {
-      if (type === 'sb3') {
+      if (type === 'sb3'|| type === 'pm') {
         mutateScratch3InPlace(projectData);
         analysis = analyzeScratch3(projectData);
         return projectData;
@@ -85,7 +85,7 @@ export const downloadProject = async (projectData, progressCallback = () => {}) 
   };
 
   const project = await downloadProjectFromBuffer(projectData, options);
-  if (project.type !== 'sb3') {
+  if (project.type !== 'sb3' || project.type === 'pm') {
     project.type = 'blob';
   }
   project.analysis = analysis;

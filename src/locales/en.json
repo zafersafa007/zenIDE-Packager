@@ -1,7 +1,7 @@
 {
   "p4": {
     "description1": {
-      "string": "Converts Scratch projects into HTML files, zip archives, or executable programs for Windows, macOS, and Linux."
+      "string": "Converts PenguinMod projects into HTML files, zip archives, or executable programs for Windows, macOS, and Linux."
     },
     "description2": {
       "string": "If you just want an easy way to embed a project into your website, you may be interested in {embedding}."
@@ -115,11 +115,11 @@
       "string": "Select Project"
     },
     "selectHelp": {
-      "string": "Select the project you want to package by copying and pasting the Scratch project link or using one of the other modes. If you use a project you didn't make, make sure to credit the creator."
+      "string": "Select the project you want to package by copying and pasting the PenguinMod project link or using one of the other modes. If you use a project you didn't make, make sure to credit the creator."
     },
     "id": {
-      "string": "Scratch Project ID or URL",
-      "context": "Radio option to select a project from the Scratch website"
+      "string": "PenguinMod Project ID or URL",
+      "context": "Radio option to select a project from the PenguinMod website"
     },
     "file": {
       "string": "File",
@@ -127,7 +127,7 @@
     },
     "url": {
       "string": "Other URL",
-      "context": "Radio option to choose a project from a non-Scratch URL"
+      "context": "Radio option to choose a project from a non-PenguinMod URL"
     },
     "loadProject": {
       "string": "Load Project",
@@ -149,11 +149,11 @@
       "context": "Error message"
     },
     "unsharedProjects": {
-      "string": "Unshared projects are no longer accessible using their project ID due to Scratch API changes.",
+      "string": "Unshared projects are not accessible using their project ID as they do not have one.",
       "context": "Warning message about unshared projects no longer being accessible."
     },
     "unsharedProjectsTemporary": {
-      "string": "Unshared projects will no longer be accessible using just their project ID at some point in the future due to upcoming Scratch API changes.",
+      "string": "Unshared projects will no longer be accessible using just their project ID at some point in the future due to upcoming PenguinMod API changes.",
       "context": "Temporary warning message about unshared projects not being accessible in the FUTURE. Will be replaced with similar message after the changes are implemented."
     },
     "unsharedProjectsWorkaround": {

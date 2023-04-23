@@ -16,17 +16,17 @@
   "userscripts": [
     {
       "url": "userscript.js",
-      "matches": ["https://scratch.mit.edu/projects/*"]
+      "matches": ["https://scratch.mit.edu/projects/*", "https://penguinmod.site/#*", "https://projects.penguinmod.site/api/projects/getPublished?type=file&id=*"]
     }
   ],
   "userstyles": [
     {
       "url": "style.css",
-      "matches": ["https://scratch.mit.edu/projects/*"]
+      "matches": ["https://scratch.mit.edu/projects/*", "https://penguinmod.site/#*", "https://projects.penguinmod.site/api/projects/getPublished?type=file&id=*"]
     },
     {
       "url": "gamepadlib.css",
-      "matches": ["https://scratch.mit.edu/projects/*"]
+      "matches": ["https://scratch.mit.edu/projects/*", "https://penguinmod.site/#*", "https://projects.penguinmod.site/api/projects/getPublished?type=file&id=*"]
     }
   ],
   "settings": [

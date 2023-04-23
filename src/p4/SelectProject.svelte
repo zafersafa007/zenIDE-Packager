@@ -16,7 +16,7 @@
   import Task from './task';
   import importProjectFromOpener from './import-project-from-opener';
 
-  const defaultProjectId = '60917032';
+  const defaultProjectId = '163240';
 
   const type = writablePersistentStore('SelectProject.type', 'id');
   const projectId = writablePersistentStore('SelectProject.id', defaultProjectId);
@@ -66,7 +66,7 @@
   // just incase some non-number string was stored from older versions
   $projectId = extractProjectId($projectId);
 
-  const getDisplayedProjectURL = () => `https://scratch.mit.edu/projects/${$projectId}`;
+  const getDisplayedProjectURL = () => `https://penguinmod.site/#${$projectId}`;
 
   const submitOnEnter = (e) => {
     if (e.key === 'Enter') {
@@ -258,7 +258,7 @@
           <input type="radio" name="project-type" bind:group={$type} value="file">
           {$_('select.file')}
         </label>
-        <input hidden={$type !== "file"} on:change={handleFileInputChange} bind:this={fileInputElement} type="file" accept=".sb,.sb2,.sb3, .pm">
+        <input hidden={$type !== "file"} on:change={handleFileInputChange} bind:this={fileInputElement} type="file" accept=".sb,.sb2,.sb3, .pm, .goobert">
       </div>
       <div class="option">
         <label>
@@ -273,22 +273,7 @@
 
     {#if $type === "id"}
       <p>
-        {$_('select.unsharedProjectsTemporary')}
-      </p>
-      <p>
-        {$_('select.unsharedProjectsWorkaround')}
-      </p>
-      <p>
-        <ComplexMessage
-          message={$_('select.unsharedProjectsMore')}
-          values={{
-            link: {
-              text: 'https://docs.turbowarp.org/unshared-projects',
-              href: 'https://docs.turbowarp.org/unshared-projects',
-              newTab: true
-            }
-          }}
-        />
+        {$_('select.unsharedProjects')}
       </p>
     {/if}
 

@@ -6,14 +6,13 @@ const getProjectMetadata = async (id) => {
     const meta = await request({
       url: [
         // Hopefully one of these URLs won't be blocked.
-        `https://trampoline.turbowarp.org/proxy/projects/${id}`,
-        `https://trampoline.turbowarp.xyz/proxy/projects/${id}`
+        `https://projects.penguinmod.site/api/projects/getPublished?id=${id}`,
+        `https://projects.penguinmod.site/api/projects/getPublished?id=${id}`
       ],
       type: 'json'
     });
     return {
-      title: meta.title,
-      token: meta.project_token
+      title: meta.name
     };
   } catch (e) {
     if (e && e.status === 404) {

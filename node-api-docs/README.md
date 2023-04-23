@@ -48,13 +48,13 @@ const Packager = require('@turbowarp/packager');
 
 ### Load a project
 
-Next you have to get a project file from somewhere. It can be a project.json or a full sb, sb2, or sb3 file. The packager doesn't provide any API for this, you have to find it on your own. The easiest way to get a project is probably to fetch one from https://projects.scratch.mit.edu/1.
+Next you have to get a project file from somewhere. It can be a project.json or a full sb, sb2, or sb3 file. The packager doesn't provide any API for this, you have to find it on your own. The easiest way to get a project is probably to fetch one from https://projects.penguinmod.site/api/projects/getPublished?type=file&id=1.
 
 Then, convert your project data to an ArrayBuffer, Uint8Array, or Node.js Buffer.
 
 ```js
 const fetch = require('cross-fetch').default; // or whatever your favorite HTTP library is
-const projectData = await (await fetch('https://projects.scratch.mit.edu/1')).arrayBuffer();
+const projectData = await (await fetch('https://projects.penguinmod.site/api/projects/getPublished?type=file&id=1')).arrayBuffer();
 
 // or:
 

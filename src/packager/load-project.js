@@ -41,7 +41,7 @@ const fromURL = async (url, progressCallback) => {
 
 const fromID = (id, token, progressCallback) => {
   const tokenPart = token ? `?token=${token}` : '';
-  const url = `https://projects.scratch.mit.edu/${id}${tokenPart}`;
+  const url = `https://projects.penguinmod.site/api/projects/getPublished?type=file&id=${id}`;
   return fromURL(url, progressCallback);
 };
 

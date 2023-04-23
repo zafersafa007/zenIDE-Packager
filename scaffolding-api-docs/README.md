@@ -149,13 +149,13 @@ Scaffolding will automatically resize the project player to fit inside the space
 
 ### Tell it where to fetch projects and assets from
 
-You have to manually configure scratch-storage to know where to fetch files from. If you want to load projects from scratch.mit.edu, you would do:
+You have to manually configure scratch-storage to know where to fetch files from. If you want to load projects from projects.penguinmod.site, you would do:
 
 ```js
 const storage = scaffolding.storage;
 storage.addWebStore(
   [storage.AssetType.Project],
-  (asset) => `https://projects.scratch.mit.edu/${asset.assetId}`
+  (asset) => `https://projects.penguinmod.site/api/projects/getPublished?type=file&id=${asset.assetId}`
 );
 storage.addWebStore(
   [storage.AssetType.ImageVector, storage.AssetType.ImageBitmap, storage.AssetType.Sound],
@@ -226,7 +226,7 @@ This returns a Promise that resolves when the project has finished loading or re
 
 The project is not automatically started when loadProject completes.
 
-If you configured scratch-storage to load projects from scratch.mit.edu, you can use:
+If you configured scratch-storage to load projects from projects.penguinmod.site, you can use:
 
 ```js
 scaffolding.storage.load(Scaffolding.Storage.AssetType.Project, "PROJECT ID HERE eg. 104")

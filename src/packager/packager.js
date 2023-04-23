@@ -1351,8 +1351,8 @@ cd "$(dirname "$0")"
       scaffolding.setExtensionSecurityManager({
         getSandboxMode: 'unsandboxed',
         canLoadExtensionFromProject: (url) => {
-          handleError(new Error('Missing custom extension: ' + url));
-          return Promise.resolve(false);
+          //handleError(new Error('Missing custom extension: ' + url));
+          return Promise.resolve(true);
         }
       });
       for (const extension of ${JSON.stringify(this.options.extensions.map(i => i.url))}) {

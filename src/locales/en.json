@@ -361,7 +361,7 @@
       "context": "Label to choose how to handle cloud variables"
     },
     "cloudVariablesHost": {
-      "string": "Cloud host",
+      "string": "Cloud Host",
       "context": "Option to use configure which cloud variable server to connect to"
     },
     "cloudVariables-ws": {

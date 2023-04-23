@@ -1151,7 +1151,7 @@ cd "$(dirname "$0")"
   <div id="launch" class="screen" hidden title="Click to start">
     <div class="green-flag">
       <svg viewBox="0 0 16.63 17.5" width="42" height="44">
-        <defs><style>.cls-1,.cls-2{fill:#4cbf56;stroke:#45993d;stroke-linecap:round;stroke-linejoin:round;}.cls-2{stroke-width:1.5px;}</style></defs>
+        <defs><style>.cls-1,.cls-2{fill:#007AF4;stroke:#003080;stroke-linecap:round;stroke-linejoin:round;}.cls-2{stroke-width:1.5px;}</style></defs>
         <path class="cls-1" d="M.75,2A6.44,6.44,0,0,1,8.44,2h0a6.44,6.44,0,0,0,7.69,0V12.4a6.44,6.44,0,0,1-7.69,0h0a6.44,6.44,0,0,0-7.69,0"/>
         <line class="cls-2" x1="0.75" y1="16.75" x2="0.75" y2="0.75"/>
       </svg>
@@ -1234,7 +1234,7 @@ cd "$(dirname "$0")"
 
       ${this.options.controls.greenFlag.enabled ? `
       const greenFlagButton = document.createElement('img');
-      greenFlagButton.src = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16.63 17.5"><path d="M.75 2a6.44 6.44 0 017.69 0h0a6.44 6.44 0 007.69 0v10.4a6.44 6.44 0 01-7.69 0h0a6.44 6.44 0 00-7.69 0" fill="#4cbf56" stroke="#45993d" stroke-linecap="round" stroke-linejoin="round"/><path stroke-width="1.5" fill="#4cbf56" stroke="#45993d" stroke-linecap="round" stroke-linejoin="round" d="M.75 16.75v-16"/></svg>');
+      greenFlagButton.src = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16.63 17.5"><path d="M.75 2a6.44 6.44 0 017.69 0h0a6.44 6.44 0 007.69 0v10.4a6.44 6.44 0 01-7.69 0h0a6.44 6.44 0 00-7.69 0" fill="#007AF4" stroke="#003080" stroke-linecap="round" stroke-linejoin="round"/><path stroke-width="1.5" fill="#007AF4" stroke="#003080" stroke-linecap="round" stroke-linejoin="round" d="M.75 16.75v-16"/></svg>');
       greenFlagButton.className = 'control-button';
       greenFlagButton.addEventListener('click', () => {
         scaffolding.greenFlag();

@@ -226,7 +226,7 @@
       "context": "Option to close the window containing the packaged project when all the scripts within a project have stopped running."
     },
     "autoplay": {
-      "string": "Start project automatically instead of showing a big green flag"
+      "string": "Start project automatically instead of showing a big blue flag"
     },
     "autoplayHint": {
       "string": "Note: Many browsers will not allow websites to automatically play sound, so sounds might not play until the user interacts with the project."
@@ -269,7 +269,7 @@
       "context": "Controls section header"
     },
     "showFlag": {
-      "string": "Show green flag button in controls"
+      "string": "Show blue flag button in controls"
     },
     "showStop": {
       "string": "Show stop sign button in controls"

@@ -531,6 +531,14 @@
       <ColorPicker bind:value={$options.monitors.listColor} />
       {$_('options.listColor')}
     </label>
+    
+    <h3>Permissions</h3>
+    <!-- svelte-ignore a11y-label-has-associated-control -->
+    <label class="option">
+      <input type="checkbox" bind:checked={$options.penguinmod.permissionManager.enabled}>
+      Enable permission manager
+    </label>
+    <p>The permission manager in PenguinMod is the prompts that appear when asking for permission to do something. You can disable it if the permission manager doesn't work in your case, or is causing annoying pop-ups constantly throughout your project.</p>
   </div>
 </Section>
 

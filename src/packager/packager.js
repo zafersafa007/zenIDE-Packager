@@ -1360,6 +1360,7 @@ cd "$(dirname "$0")"
       }
 
       ${this.options.closeWhenStopped ? `vm.runtime.on('PROJECT_RUN_STOP', () => window.close());` : ''}
+      ${this.options.penguinmod.permissionManager.enabled ? '' : `vm.runtime.isProjectPermissionManagerDisabled = true;`}
 
       ${this.options.target.startsWith('nwjs-') ? `
       if (typeof nw !== 'undefined') {
@@ -1540,6 +1541,11 @@ Packager.DEFAULT_OPTIONS = () => ({
     editableLists: false,
     variableColor: '#ff8c1a',
     listColor: '#fc662c'
+  },
+  penguinmod: {
+    permissionManager: {
+      enabled: false,
+    },
   },
   compiler: {
     enabled: true,

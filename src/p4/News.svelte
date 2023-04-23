@@ -15,6 +15,6 @@
 
 <Section accent={color}>
   <div>
-    <p><span class="badge">New!</span> Custom extensions are now loaded unsandboxed in the packager.</p>
+    <p><span class="badge">New!</span> The packager should finally work now, and we even took the time to rebrand it!</p>
   </div>
 </Section>

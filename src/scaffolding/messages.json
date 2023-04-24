@@ -23,6 +23,7 @@
   "var-hour": "hour",
   "var-minute": "minute",
   "var-second": "second",
+  "var-get_counter": "counter",
   "list-empty": "(empty)",
   "list-length": "length {n}",
   "list-import": "import",

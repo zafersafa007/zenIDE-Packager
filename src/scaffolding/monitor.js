@@ -49,6 +49,8 @@ class Monitor {
       }
     } else if (this.opcode === 'looks_size') {
       label = this.parent.getMessage('var-size');
+    } else if (this.opcode === 'control_get_counter') {
+      label = this.parent.getMessage('var-get_counter');
     } else if (this.opcode === 'sensing_answer') {
       label = this.parent.getMessage('var-answer');
     } else if (this.opcode === 'sensing_mousedown') {

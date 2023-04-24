@@ -169,6 +169,9 @@
 .monitor-root[opcode^="sound_"] .monitor-value-color {
   background-color: #cf63cf;
 }
+.monitor-root[opcode^="control_"] .monitor-value-color {
+  background-color: #FFAB19;
+}
 .monitor-large-value {
   min-height: 1.4rem;
   min-width: 3rem;

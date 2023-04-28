@@ -704,7 +704,7 @@
     <details>
       <summary>{$_('options.advancedSummary')}</summary>
 
-      <div class="option">
+      <div class="option" style="display:none">
         <label>
           <input type="checkbox" bind:checked={$options.compiler.enabled}>
           {$_('options.enableCompiler')}

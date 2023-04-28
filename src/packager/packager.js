@@ -1340,7 +1340,7 @@ cd "$(dirname "$0")"
         maxClones: ${this.options.maxClones},
       });
       if (vm.setCompilerOptions) vm.setCompilerOptions({
-        enabled: ${this.options.compiler.enabled},
+        enabled: true,
         warpTimer: ${this.options.compiler.warpTimer}
       });
 

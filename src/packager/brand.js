@@ -28,7 +28,7 @@ If this is set to an empty string, the link is removed.
 
 module.exports = {
   APP_NAME: 'PenguinMod Packager',
-  WEBSITE: 'https://penguinmod.site/PenguinMod-Packager/',
+  WEBSITE: 'https://studio.penguinmod.site/PenguinMod-Packager/',
   COPYRIGHT_NOTICE: `Copyright (C) 2021-2022 Thomas Weber
 
 Licensed under the Apache License, Version 2.0 (the "License");

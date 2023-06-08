@@ -163,6 +163,15 @@ storage.addWebStore(
 );
 ```
 
+Downloading shared Scratch projects can be done manually with something like this:
+
+```js
+const id = '437419376';
+const projectMetadata = await (await fetch(`https://trampoline.turbowarp.org/api/projects/${id}`)).json();
+const token = projectMetadata.project_token;
+const projectData = await (await fetch(`https://projects.scratch.mit.edu/${id}?token=${token}`)).arrayBuffer();
+```
+
 ### Configure cloud variables
 
 By default cloud variables are just normal variables. You must reconfigure this manually if you don't want that.

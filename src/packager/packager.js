@@ -981,6 +981,53 @@ cd "$(dirname "$0")"
     return `url(${data}) ${this.options.cursor.center.x} ${this.options.cursor.center.y}, auto`;
   }
 
+  async generateExtensionURLs () {
+    const dispatchProgress = (progress) => this.dispatchEvent(new CustomEvent('fetch-extensions', {
+      detail: {
+        progress
+      }
+    }));
+
+    const shouldTryToFetch = (url) => {
+      if (!this.options.bakeExtensions) {
+        return false;
+      }
+      try {
+        const parsed = new URL(url);
+        return parsed.protocol === 'http:' || parsed.protocol === 'https:';
+      } catch (e) {
+        return false;
+      }
+    };
+
+    /** @type {string[]} */
+    const allURLs = this.options.extensions.map(i => i.url);
+    const unfetchableURLs = allURLs.filter((url) => !shouldTryToFetch(url));
+    const urlsToFetch = allURLs.filter((url) => shouldTryToFetch(url));
+    const finalURLs = [...unfetchableURLs];
+
+    if (urlsToFetch.length !== 0) {
+      for (let i = 0; i < urlsToFetch.length; i++) {
+        dispatchProgress(i / urlsToFetch.length);
+        const url = urlsToFetch[i];
+        try {
+          const source = await Adapter.fetchExtensionScript(url);
+          // Wrap the extension in an IIFE so that extensions written for the sandbox are less
+          // likely to cause issues in an unsandboxed environment due to global pollution or
+          // overriding Scratch.*
+          const wrappedSource = `(function(Scratch) { ${source} })(Scratch);`
+          const dataURI = `data:text/javascript;,${encodeURIComponent(wrappedSource)}`;
+          finalURLs.push(dataURI);
+        } catch (e) {
+          finalURLs.push(url);
+        }
+      }
+      dispatchProgress(1);
+    }
+
+    return finalURLs;
+  }
+
   async package () {
     if (!Adapter) {
       throw new Error('Missing adapter');
@@ -1101,7 +1148,6 @@ cd "$(dirname "$0")"
       width: 2rem;
       height: 2rem;
       padding: 0.375rem;
-      border-radius: 0.25rem;
       margin-top: 0.5rem;
       margin-bottom: 0.5rem;
       user-select: none;
@@ -1236,6 +1282,7 @@ cd "$(dirname "$0")"
       const greenFlagButton = document.createElement('img');
       greenFlagButton.src = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16.63 17.5"><path d="M.75 2a6.44 6.44 0 017.69 0h0a6.44 6.44 0 007.69 0v10.4a6.44 6.44 0 01-7.69 0h0a6.44 6.44 0 00-7.69 0" fill="#007AF4" stroke="#003080" stroke-linecap="round" stroke-linejoin="round"/><path stroke-width="1.5" fill="#007AF4" stroke="#003080" stroke-linecap="round" stroke-linejoin="round" d="M.75 16.75v-16"/></svg>');
       greenFlagButton.className = 'control-button';
+      greenFlagButton.draggable = false;
       greenFlagButton.addEventListener('click', () => {
         scaffolding.greenFlag();
       });
@@ -1253,6 +1300,7 @@ cd "$(dirname "$0")"
       ${this.options.controls.pause.enabled ? `
       const pauseButton = document.createElement('img');
       pauseButton.className = 'control-button';
+      pauseButton.draggable = false;
       let isPaused = false;
       pauseButton.addEventListener('click', () => {
         isPaused = !isPaused;
@@ -1276,6 +1324,7 @@ cd "$(dirname "$0")"
       const stopAllButton = document.createElement('img');
       stopAllButton.src = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14"><path fill="#ec5959" stroke="#b84848" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M4.3.5h5.4l3.8 3.8v5.4l-3.8 3.8H4.3L.5 9.7V4.3z"/></svg>');
       stopAllButton.className = 'control-button';
+      stopAllButton.draggable = false;
       stopAllButton.addEventListener('click', () => {
         scaffolding.stopAll();
       });
@@ -1288,6 +1337,7 @@ cd "$(dirname "$0")"
       if (document.fullscreenEnabled || document.webkitFullscreenEnabled) {
         let isFullScreen = !!(document.fullscreenElement || document.webkitFullscreenElement);
         const fullscreenButton = document.createElement('img');
+        fullscreenButton.draggable = false;
         fullscreenButton.className = 'control-button fullscreen-button';
         fullscreenButton.addEventListener('click', () => {
           if (isFullScreen) {

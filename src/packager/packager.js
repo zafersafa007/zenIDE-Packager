@@ -1379,7 +1379,7 @@ cd "$(dirname "$0")"
           document.body.appendChild(fullscreenButton);
         }
       }` : ''}
-      //fetch('https://raw.githubusercontent.com/PenguinMod/PenguinMod-Vm/develop/src/extensions/jg_files/index.js').then(r=>r.text()).then(t=>eval(t))
+      // fetch('https://raw.githubusercontent.com/PenguinMod/PenguinMod-Vm/develop/src/extensions/jg_files/index.js').then(r=>r.text()).then(t=>eval(t))
       vm.setTurboMode(${this.options.turbo});
       if (vm.setInterpolation) vm.setInterpolation(${this.options.interpolation});
       if (vm.setFramerate) vm.setFramerate(${this.options.framerate});
@@ -1411,6 +1411,7 @@ cd "$(dirname "$0")"
 
       ${this.options.closeWhenStopped ? `vm.runtime.on('PROJECT_RUN_STOP', () => window.close());` : ''}
       ${this.options.penguinmod.permissionManager.enabled ? '' : `vm.runtime.isProjectPermissionManagerDisabled = true;`}
+      ${this.options.penguinmod.permissionManager.unsandboxedJavascript ? '' : `vm.runtime.extensionRuntimeOptions.javascriptUnsandboxed = true;`}
 
       ${this.options.target.startsWith('nwjs-') ? `
       if (typeof nw !== 'undefined') {
@@ -1595,6 +1596,7 @@ Packager.DEFAULT_OPTIONS = () => ({
   penguinmod: {
     permissionManager: {
       enabled: false,
+      unsandboxedJavascript: false,
     },
   },
   compiler: {

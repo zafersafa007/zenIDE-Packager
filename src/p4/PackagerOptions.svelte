@@ -539,6 +539,15 @@
       Enable permission manager
     </label>
     <p>The permission manager in PenguinMod is the prompts that appear when asking for permission to do something. You can disable it if the permission manager doesn't work in your case, or is causing annoying pop-ups constantly throughout your project.</p>
+    <!-- svelte-ignore a11y-label-has-associated-control -->
+    <label class="option">
+      <input type="checkbox" bind:checked={$options.penguinmod.permissionManager.unsandboxedJavascript}>
+      Remove sandbox on the JavaScript Extension
+    </label>
+    <p>For security, the JavaScript blocks in the JavaScript extensions are sandboxed to limit the things they can access.</p>
+    <p class="warning">
+      Removing the sandbox on projects not owned by you can allow them to delete your settings, phish for passwords or do other bad stuff. Only remove the sandbox on projects you own.
+    </p>
   </div>
 </Section>
 

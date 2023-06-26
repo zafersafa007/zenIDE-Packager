@@ -1411,7 +1411,7 @@ cd "$(dirname "$0")"
 
       ${this.options.closeWhenStopped ? `vm.runtime.on('PROJECT_RUN_STOP', () => window.close());` : ''}
       ${this.options.penguinmod.permissionManager.enabled ? '' : `vm.runtime.isProjectPermissionManagerDisabled = true;`}
-      ${this.options.penguinmod.permissionManager.unsandboxedJavascript ? '' : `vm.runtime.extensionRuntimeOptions.javascriptUnsandboxed = true;`}
+      ${this.options.penguinmod.permissionManager.unsandboxedJavascript ? `vm.runtime.extensionRuntimeOptions.javascriptUnsandboxed = true;` : ''}
 
       ${this.options.target.startsWith('nwjs-') ? `
       if (typeof nw !== 'undefined') {

@@ -31,6 +31,12 @@ jobs:
     - name: Install dependencies
       run: npm i -g pnpm && pnpm up && pnpm i --shamefully-hoist
     - name: Build
+      run: npm run build
+      env:
+        NODE_ENV: production
+        ENABLE_SERVICE_WORKER: 1
+    - name: Test
+      run: npm test
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v1
       with:

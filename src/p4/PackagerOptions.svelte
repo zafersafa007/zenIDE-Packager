@@ -40,7 +40,14 @@
   }
   defaultOptions.app.packageName = Packager.getDefaultPackageNameFromFileName(projectData.title);
   defaultOptions.app.windowTitle = Packager.getWindowTitleFromFileName(projectData.title);
+  defaultOptions.extensions = projectData.project.analysis.extensions;
   const options = writablePersistentStore(`PackagerOptions.${projectData.uniqueId}`, defaultOptions);
+
+  // Compatibility with https://github.com/TurboWarp/packager/commit/f66199abd1c896c11aa69247275a1594fdfc95b8
+  $options.extensions = $options.extensions.map(i => {
+    if (typeof i === 'object' && i) return i.url || '';
+    return i;
+  });
 
   const hasMagicComment = (magic) => projectData.project.analysis.stageComments.find(
     (text) => text.split('\n').find((line) => line.endsWith(magic))
@@ -86,6 +93,18 @@
     'webview-mac',
     'electron-linux64'
   ].includes($options.target);
+
+  const advancedOptionsInitiallyOpen = (
+    $options.compiler.enabled !== defaultOptions.compiler.enabled ||
+    $options.compiler.warpTimer !== defaultOptions.compiler.warpTimer ||
+    $options.extensions.length !== 0 ||
+    $options.bakeExtensions !== defaultOptions.bakeExtensions ||
+    $options.custom.css !== '' ||
+    $options.custom.js !== '' ||
+    $options.projectId !== defaultOptions.projectId ||
+    $options.packagedRuntime !== defaultOptions.packagedRuntime ||
+    $options.maxTextureDimension !== defaultOptions.maxTextureDimension
+  );
 
   const automaticallyCenterCursor = () => {
     const icon = $customCursorIcon;
@@ -703,8 +722,10 @@
     resetOptions([
       'compiler',
       'extensions',
+      'bakeExtensions',
       'custom',
-      'projectId'
+      'projectId',
+      'maxTextureDimension'
     ]);
   }}
 >
@@ -757,6 +778,13 @@
         <input type="checkbox" bind:checked={$options.packagedRuntime} />
         <!-- This option is temporary, so don't translate. -->
         Use "packaged runtime" mode (experimental)
+      </label>
+
+      <label class="option">
+        <input type="checkbox" checked={$options.maxTextureDimension !== defaultOptions.maxTextureDimension} on:change={(e) => {
+          $options.maxTextureDimension = defaultOptions.maxTextureDimension * (e.target.checked ? 2 : 1);
+        }} />
+        {$_('options.maxTextureDimension')}
       </label>
     </details>
   </div>

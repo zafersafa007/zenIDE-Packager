@@ -1001,7 +1001,7 @@ cd "$(dirname "$0")"
     };
 
     /** @type {string[]} */
-    const allURLs = this.options.extensions.map(i => i.url);
+    const allURLs = this.options.extensions;
     const unfetchableURLs = allURLs.filter((url) => !shouldTryToFetch(url));
     const urlsToFetch = allURLs.filter((url) => shouldTryToFetch(url));
     const finalURLs = [...unfetchableURLs];
@@ -1019,6 +1019,7 @@ cd "$(dirname "$0")"
           const dataURI = `data:text/javascript;,${encodeURIComponent(wrappedSource)}`;
           finalURLs.push(dataURI);
         } catch (e) {
+          console.warn('Could not bake extension', url, e);
           finalURLs.push(url);
         }
       }
@@ -1177,7 +1178,7 @@ cd "$(dirname "$0")"
     .sc-canvas {
       cursor: ${await this.generateCursor()};
     }
-    .sc-monitor-root[opcode^="data_"] .sc-monitor-value-color {
+    .sc-monitor-root[data-opcode^="data_"] .sc-monitor-value-color {
       background-color: ${this.options.monitors.variableColor};
     }
     .sc-monitor-row-value-outer {
@@ -1393,6 +1394,7 @@ cd "$(dirname "$0")"
         enabled: true,
         warpTimer: ${this.options.compiler.warpTimer}
       });
+      if (vm.renderer.setMaxTextureDimension) vm.renderer.setMaxTextureDimension(${this.options.maxTextureDimension});
 
       if (typeof ScaffoldingAddons !== 'undefined') {
         ScaffoldingAddons.run(scaffolding, ${JSON.stringify(this.getAddonOptions())});
@@ -1409,7 +1411,12 @@ cd "$(dirname "$0")"
         vm.extensionManager.loadExtensionURL(extension);
       }
 
-      ${this.options.closeWhenStopped ? `vm.runtime.on('PROJECT_RUN_STOP', () => window.close());` : ''}
+      ${this.options.closeWhenStopped ? `
+      vm.runtime.on('PROJECT_RUN_STOP', () => {
+        if (!vm.isPaused || !vm.isPaused()) {
+          window.close();
+        }
+      });` : ''}
       ${this.options.penguinmod.permissionManager.enabled ? '' : `vm.runtime.isProjectPermissionManagerDisabled = true;`}
       ${this.options.penguinmod.permissionManager.unsandboxedJavascript ? `vm.runtime.extensionRuntimeOptions.javascriptUnsandboxed = true;` : ''}
 
@@ -1631,7 +1638,9 @@ Packager.DEFAULT_OPTIONS = () => ({
       y: 0
     }
   },
-  extensions: []
+  extensions: [],
+  bakeExtensions: true,
+  maxTextureDimension: 2048
 });
 
 export default Packager;

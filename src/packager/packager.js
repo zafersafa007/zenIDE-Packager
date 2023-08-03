@@ -1407,7 +1407,7 @@ cd "$(dirname "$0")"
           return Promise.resolve(true);
         }
       });
-      for (const extension of ${JSON.stringify(this.options.extensions.map(i => i.url))}) {
+      for (const extension of ${JSON.stringify(await this.generateExtensionURLs())}) {
         vm.extensionManager.loadExtensionURL(extension);
       }
 

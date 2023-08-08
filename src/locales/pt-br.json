@@ -137,7 +137,6 @@
         "donate": "Doar",
         "error": "Erro",
         "errorMessage": "Mensagem: {error}",
-        "fosshost": "Agradecemos ao Fosshost por providenciar servidores usados pelo exportador.",
         "importingInterface": "Carregando opções...",
         "networkError": "Não foi possível baixar {url}. Verifique se está conectado a internet e tente desativar quaisquer extensão de navegador.",
         "outdated": "Esta versão do exportador aparenta estar desatualizada. Por favor, renicie a página e tente novamente.",

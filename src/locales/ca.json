@@ -136,7 +136,6 @@
         "donate": "Fes una donació",
         "errorMessage": "Missatge: {error}",
         "feedback": "Comentaris",
-        "fosshost": "Gràcies a Fosshost per proporcionar servidors utilitzats per el empaquetador",
         "importingInterface": "S'estan carregant les opcions...",
         "networkError": "No s'ha pogut baixar {url}. Assegura't que tens connectivitat a internet i prova de desactivar les extensions del explorador.",
         "outdated": "Aquesta versió del packager sembla estar obsoleta. Actualitza i torna-ho a intentar.",
@@ -175,7 +174,6 @@
         "select": "Selecciona projecte",
         "selectHelp": "Seleccioneu el projecte que voleu empaquetar copiant i enganxant l'enllaç del projecte Scratch o utilitzant un dels altres modes. Si utilitzeu un projecte que no heu fet, assegureu-vos de donar crèdit al creador.",
         "unsharedProjects": "Els projectes no compartits ja no són accessibles amb el seu ID a causa dels canvis de l'API de Scratch.",
-        "unsharedProjectsTemporary": "Els projectes no compartits ja no seran accessibles amb el seu ID en algun moment a causa dels propers canvis a l'API de Scratch.",
         "unsharedProjectsMore": "Per a més informació i solucions, visita: {link}",
         "unsharedProjectsWorkaround": "En lloc d'això, pots compartir el projecte o desar-lo al teu ordinador (Fitxer > Desa a l'ordinador) i carregar el fitxer al empaquetador. Els fitxers generats pel empaquetador són totalment autònoms i no estan afectats per aquests canvis.",
         "url": "Un altre URL"

@@ -174,9 +174,9 @@
     </div>
   </Section>
 
-  <!-- {#if !isStandalone}
+  {#if !isStandalone}
     <News />
-  {/if} -->
+  {/if}
 
   {#if isSupported}
     <SelectProject bind:projectData />

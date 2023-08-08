@@ -1304,10 +1304,10 @@ cd "$(dirname "$0")"
       pauseButton.draggable = false;
       let isPaused = false;
       pauseButton.addEventListener('click', () => {
-        isPaused = !isPaused;
-        vm.setPaused(isPaused);
+        vm.setPaused(!isPaused);
       });
-      const updatePause = () => {
+      const updatePause = (_isPaused) => {
+        isPaused = _isPaused;
         if (isPaused) {
           pauseButton.src = 'data:image/svg+xml,' + encodeURIComponent('<svg width="16" height="16" viewBox="0 0 4.2333332 4.2333335" xmlns="http://www.w3.org/2000/svg"><path d="m3.95163484 2.02835365-1.66643921.9621191-1.66643913.96211911V.10411543l1.66643922.9621191z" fill="#ffae00"/></svg>');
         } else {
@@ -1380,7 +1380,7 @@ cd "$(dirname "$0")"
           document.body.appendChild(fullscreenButton);
         }
       }` : ''}
-      // fetch('https://raw.githubusercontent.com/PenguinMod/PenguinMod-Vm/develop/src/extensions/jg_files/index.js').then(r=>r.text()).then(t=>eval(t))
+
       vm.setTurboMode(${this.options.turbo});
       if (vm.setInterpolation) vm.setInterpolation(${this.options.interpolation});
       if (vm.setFramerate) vm.setFramerate(${this.options.framerate});
@@ -1403,8 +1403,8 @@ cd "$(dirname "$0")"
       scaffolding.setExtensionSecurityManager({
         getSandboxMode: 'unsandboxed',
         canLoadExtensionFromProject: (url) => {
-          //handleError(new Error('Missing custom extension: ' + url));
-          return Promise.resolve(true);
+          handleError(new Error('Missing custom extension: ' + url));
+          return Promise.resolve(false);
         }
       });
       for (const extension of ${JSON.stringify(await this.generateExtensionURLs())}) {
@@ -1475,7 +1475,7 @@ cd "$(dirname "$0")"
 
     if (this.options.target !== 'html') {
       let zip;
-      if (this.project.type === 'sb3'|| this.project.type === 'pm' && this.options.target !== 'zip-one-asset') {
+      if (this.project.type === 'sb3' || this.project.type === 'pm' && this.options.target !== 'zip-one-asset') {
         zip = await (await getJSZip()).loadAsync(this.project.arrayBuffer);
         for (const file of Object.keys(zip.files)) {
           zip.files[`assets/${file}`] = zip.files[file];

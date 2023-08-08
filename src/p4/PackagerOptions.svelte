@@ -139,6 +139,10 @@
 
     task.setProgressText($_('progress.loadingScripts'));
 
+    packager.addEventListener('fetch-extensions', ({detail}) => {
+      task.setProgressText($_('progress.downloadingExtensions'));
+      task.setProgress(detail.progress);
+    });
     packager.addEventListener('large-asset-fetch', ({detail}) => {
       let thing;
       if (detail.asset.startsWith('nwjs-')) {
@@ -731,7 +735,7 @@
 >
   <div>
     <h2>{$_('options.advancedOptions')}</h2>
-    <details>
+    <details open={advancedOptionsInitiallyOpen}>
       <summary>{$_('options.advancedSummary')}</summary>
 
       <div class="option" style="display:none">
@@ -760,6 +764,11 @@
       </label>
 
       <label class="option">
+        <input type="checkbox" bind:checked={$options.bakeExtensions}>
+        {$_('options.bakeExtensions')}
+      </label>
+
+      <label class="option">
         {$_('options.customCSS')}
         <textarea bind:value={$options.custom.css}></textarea>
       </label>
@@ -776,8 +785,7 @@
 
       <label class="option">
         <input type="checkbox" bind:checked={$options.packagedRuntime} />
-        <!-- This option is temporary, so don't translate. -->
-        Use "packaged runtime" mode (experimental)
+        {$_('options.packagedRuntime')}
       </label>
 
       <label class="option">

@@ -55,6 +55,6 @@ limitations under the License.`,
     name: 'GitHub',
     link: 'https://github.com/PenguinMod/PenguinMod-Packager/issues'
   },
-  DONATE: 'https://github.com/sponsors/GarboMuffin',
+  DONATE: 'https://penguinmod.site/donate',
   PRIVACY_POLICY: 'https://turbowarp.org/privacy.html',
 };

@@ -16,17 +16,29 @@
   "userscripts": [
     {
       "url": "userscript.js",
-      "matches": ["https://scratch.mit.edu/projects/*", "https://penguinmod.site/#*", "https://projects.penguinmod.site/api/projects/getPublished?type=file&id=*"]
+      "matches": [
+        "https://scratch.mit.edu/projects/*",
+        "https://penguinmod.com/#*",
+        "https://projects.penguinmod.com/api/projects/getPublished?type=file&id=*"
+      ]
     }
   ],
   "userstyles": [
     {
       "url": "style.css",
-      "matches": ["https://scratch.mit.edu/projects/*", "https://penguinmod.site/#*", "https://projects.penguinmod.site/api/projects/getPublished?type=file&id=*"]
+      "matches": [
+        "https://scratch.mit.edu/projects/*",
+        "https://penguinmod.com/#*",
+        "https://projects.penguinmod.com/api/projects/getPublished?type=file&id=*"
+      ]
     },
     {
       "url": "gamepadlib.css",
-      "matches": ["https://scratch.mit.edu/projects/*", "https://penguinmod.site/#*", "https://projects.penguinmod.site/api/projects/getPublished?type=file&id=*"]
+      "matches": [
+        "https://scratch.mit.edu/projects/*",
+        "https://penguinmod.com/#*",
+        "https://projects.penguinmod.com/api/projects/getPublished?type=file&id=*"
+      ]
     }
   ],
   "settings": [
@@ -37,7 +49,11 @@
       "id": "hide"
     }
   ],
-  "tags": ["editor", "projectPlayer", "recommended"],
+  "tags": [
+    "editor",
+    "projectPlayer",
+    "recommended"
+  ],
   "enabledByDefault": false,
   "versionAdded": "1.14.0",
   "dynamicEnable": true,

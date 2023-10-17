@@ -59,7 +59,7 @@
   // just incase some non-number string was stored from older versions
   $projectId = extractProjectId($projectId);
 
-  const getDisplayedProjectURL = () => `https://studio.penguinmod.site/#${$projectId}`;
+  const getDisplayedProjectURL = () => `https://studio.penguinmod.com/#${$projectId}`;
 
   const submitOnEnter = (e) => {
     if (e.key === 'Enter') {

@@ -34,7 +34,7 @@
       "context": "Error displayed when the packager detects that you are using an old version and that you must refresh to continue."
     },
     "cannotAccessProject": {
-      "string": "Can't access the project. This usually means the project never existed, the ID is invalid, or your network is blocking projects.penguinmod.site.",
+      "string": "Can't access the project. This usually means the project never existed, the ID is invalid, or your network is blocking projects.penguinmod.com.",
       "context": "Part of the error modal when loading an unshared project."
     },
     "cannotAccessProjectCaching": {

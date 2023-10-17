@@ -1,11 +1,11 @@
-import {transfer, proxy} from 'comlink';
+import { transfer, proxy } from 'comlink';
 import createDownloadWorker from '../build/p4-worker-loader!./download-project';
-import {readAsArrayBuffer} from '../common/readers';
+import { readAsArrayBuffer } from '../common/readers';
 import request from '../common/request';
-import {AbortError} from '../common/errors';
+import { AbortError } from '../common/errors';
 
 const downloadProject = async (buffer, progressCallback) => {
-  const {worker, terminate} = await createDownloadWorker();
+  const { worker, terminate } = await createDownloadWorker();
   let terminateAndReject;
   const downloadPromise = new Promise((resolve, reject) => {
     worker.downloadProject(transfer(buffer, [buffer]), proxy(progressCallback))
@@ -41,7 +41,7 @@ const fromURL = async (url, progressCallback) => {
 
 const fromID = (id, token, progressCallback) => {
   const tokenPart = token ? `?token=${token}` : '';
-  const url = `https://projects.penguinmod.site/api/projects/getPublished?type=file&id=${id}`;
+  const url = `https://projects.penguinmod.com/api/projects/getPublished?type=file&id=${id}`;
   return fromURL(url, progressCallback);
 };
 

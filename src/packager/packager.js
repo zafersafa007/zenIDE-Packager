@@ -1424,6 +1424,7 @@ cd "$(dirname "$0")"
         fencing: ${this.options.fencing},
         miscLimits: ${this.options.miscLimits},
         maxClones: ${this.options.maxClones},
+        dangerousOptimizations: ${this.options.dangerousOptimizations}
       });
       if (vm.setCompilerOptions) vm.setCompilerOptions({
         enabled: true,
@@ -1591,6 +1592,7 @@ Packager.DEFAULT_OPTIONS = () => ({
   maxClones: 300,
   fencing: true,
   miscLimits: true,
+  dangerousOptimizations: false,
   stageWidth: 480,
   stageHeight: 360,
   resizeMode: 'preserve-ratio',

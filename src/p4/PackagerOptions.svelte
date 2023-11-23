@@ -334,6 +334,7 @@
       'maxClones',
       'fencing',
       'miscLimits',
+      'dangerousOptimizations',
       'stageWidth',
       'stageHeight',
       'resizeMode',
@@ -401,6 +402,14 @@
         {$_('options.removeMiscLimits')}
       </label>
       <LearnMore slug="remove-misc-limits" />
+    </div>
+    <div class="option">
+      <label>
+        <input type="checkbox" checked={!$options.dangerousOptimizations} on:change={(e) => {
+          $options.dangerousOptimizations = e.target.checked;
+        }}>
+        Enable Dangerous Optimizations
+      </label>
     </div>
     <label class="option">
       {$_('options.username')}
